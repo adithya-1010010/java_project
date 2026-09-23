@@ -1,0 +1,16 @@
+# Phase Status
+
+| Phase | Description | Status | Commit |
+|---|---|---|---|
+| 01 | Project foundation and documentation | ✅ Complete | `phase-01: initialize JavaFX Maven project and project documentation` |
+| 02 | Domain model and OOP foundation | ⬜ Not started | — |
+| 03 | SQLite database and persistence foundation | ⬜ Not started | — |
+| 04 | Authentication | ⬜ Not started | — |
+| 05 | Movie and show modules | ⬜ Not started | — |
+| 06 | Seat management | ⬜ Not started | — |
+| 07 | Booking and ticket calculation | ⬜ Not started | — |
+| 08 | Complete confirmation / ticket module | ⬜ Not started | — |
+| 09 | End-to-end integration and validation | ⬜ Not started | — |
+| 10 | Quality, polish, documentation, and final acceptance | ⬜ Not started | — |
+
+Details per phase: `docs/12-phases/phase-NN.md`.
