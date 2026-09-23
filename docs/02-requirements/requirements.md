@@ -21,3 +21,5 @@ Normalized requirement IDs traced to phases. Detail: [functional-requirements.md
 | REQ-15 | Home module provides main page and navigation | Home | Home view/controller | 05 | Integration tests |
 
 Traceability must be kept current here and in `docs/10-testing/test-cases.md`.
+
+Note: REQ-14 is implemented for Phase 02 (Person → Customer/User inheritance; PricingStrategy polymorphism, both with OOP tests).

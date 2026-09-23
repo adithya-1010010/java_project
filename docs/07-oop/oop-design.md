@@ -1,19 +1,92 @@
 # OOP Design
 
-The system must demonstrate OOP for real design reasons — no artificial hierarchies.
+The system demonstrates OOP for real design reasons — no artificial hierarchies.
 
-## Class and objects
+```mermaid
+classDiagram
+    class Person {
+        <<abstract>>
+        +String fullName
+        +String email
+        +String phone
+        +describe()*
+    }
+    class Customer {
+        +describe()
+    }
+    class User {
+        +String username
+        +String passwordHash
+        +describe()
+    }
+    Person <|-- Customer : inheritance
+    Person <|-- User : inheritance
 
-Domain entities (Movie, Show, Seat, Booking, Ticket, …) have clear state and behavior.
+    class Movie {
+        +String title
+        +MovieGenre genre
+        +BigDecimal ticketPrice
+        +int durationMinutes
+    }
+    class Theatre {
+        +String name
+        +String location
+    }
+    class Show {
+        +LocalDateTime startTime
+        +LocalDateTime endTime
+        +hasSeat(Seat)
+        +getAvailableSeats()
+    }
+    class Seat {
+        +char row
+        +int column
+        +SeatState state
+        +book()
+        +isAvailable()
+    }
+    class Booking {
+        +String bookingCode
+        +boolean confirmed
+        +confirm()
+    }
+    class Ticket {
+        +int quantity
+        +BigDecimal unitPrice
+        +BigDecimal total
+    }
+    class PricingStrategy {
+        <<interface>>
+        +price(basePrice, ticketCount) BigDecimal
+    }
+    class StandardPricing {
+        +price(basePrice, ticketCount)
+    }
+    class DiscountedPricing {
+        +int minTickets
+        +BigDecimal discountPercent
+        +price(basePrice, ticketCount)
+    }
+    PricingStrategy <|.. StandardPricing : polymorphism
+    PricingStrategy <|.. DiscountedPricing : polymorphism
 
-## Inheritance
+    Movie "1" --> "*" Show
+    Theatre "1" --> "*" Show
+    Show "1" --> "*" Seat
+    Customer "1" --> "*" Booking
+    Booking "1" --> "1" Show
+    Booking "1" --> "*" Seat
+    Booking "1" --> "1" Ticket
+    Ticket "1" --> "1" PricingStrategy : uses
+```
 
-Only where a genuine `is-a` relationship exists (candidate area: a ticket/booking presentation hierarchy — final decision in Phase 02).
+## Where each OOP concept is demonstrated
 
-## Polymorphism
+| Concept | Demonstration | Rationale |
+|---|---|---|
+| Class | Movie, Theatre, Show, Seat, Customer, User, Booking, Ticket | Domain entities with state and behavior |
+| Object | Instances of every class, composed into shows/bookings | Objects interact through behavior, e.g. `Booking.confirm()` marks `Seat`s booked |
+| Inheritance | `Person` (abstract) → `Customer`, `User` | Genuine `is-a`: both are people sharing identity/contact fields; each refines `describe()` |
+| Polymorphism | `PricingStrategy` interface with `StandardPricing`, `DiscountedPricing`; delegated through `Ticket` | `Ticket` calls a strategy without knowing its type; runtime choice changes totals (REQ-10) |
 
-Through meaningful abstractions: shared service/interface/repository contracts, or a real domain hierarchy. Never a parent class created solely to claim polymorphism.
-
-The final class diagram must explicitly label where class, object, inheritance, and polymorphism are demonstrated.
-
-Details: [classes.md](classes.md), [inheritance.md](inheritance.md), [polymorphism.md](polymorphism.md).
+Detail: [classes.md](classes.md), [inheritance.md](inheritance.md), [polymorphism.md](polymorphism.md).

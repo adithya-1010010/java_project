@@ -45,7 +45,14 @@ From `context.md` (see `docs/02-requirements/requirements.md` for IDs REQ-01…1
 
 ## Class / design decisions
 
-- Core domain candidates (Phase 02 to finalize): Movie, Theatre, Show, Seat, Customer, Booking, Ticket, User. OOP demonstrated for real reasons only; no artificial hierarchies (polymorphism via interface/repository contract or genuine hierarchy).
+Finalized in Phase 02 (all under `com.movieticketbooking.model`; pricing under `model.pricing`):
+
+- Entities: Movie (+ `MovieGenre`), Theatre, Show, Seat (+ `SeatState`), Person (abstract), Customer, User, Ticket, Booking.
+- **Inheritance:** `Person` (abstract: fullName, email, phone, `describe()`) → `Customer`, `User`. Genuine is-a shared identity fields.
+- **Polymorphism:** `PricingStrategy` interface → `StandardPricing`, `DiscountedPricing`. `Ticket` delegates total calculation (supports REQ-10).
+- **Money:** all prices/totals are `BigDecimal`, normalized to 2 decimals (HALF_UP).
+- **Model invariants:** price ≥ 0; show end after start; unique seats per show; booking needs ≥ 1 seat; `Booking.confirm()` re-checks availability then marks seat(s) booked (no partial confirm); duplicate seat booking rejected at model level.
+- `Ticket` also validates seats belong to the show and no duplicates.
 
 ## DB design decisions
 
@@ -63,8 +70,9 @@ From `context.md` (see `docs/02-requirements/requirements.md` for IDs REQ-01…1
 ## Completed / current / next
 
 - Completed: **Phase 01** (foundation + docs). Commit `phase-01: initialize JavaFX Maven project and project documentation`.
+- Completed: **Phase 02** (domain model + OOP foundation). Commit `phase-02: domain model and oop foundation`.
 - Current: none in progress.
-- Next: **Phase 02** — Domain model and OOP foundation (do NOT start automatically; only on explicit instruction).
+- Next: **Phase 03** — SQLite schema, seed data, persistence layer (do NOT start automatically; only on explicit instruction).
 
 ## Known limitations
 
@@ -75,4 +83,11 @@ From `context.md` (see `docs/02-requirements/requirements.md` for IDs REQ-01…1
 
 - `mvn test`: BUILD SUCCESS, 1 test, 0 failures.
 - `mvn javafx:run`: window opened.
+
+## Phase-02 verification
+
+- `mvn test`: BUILD SUCCESS, 47 tests, 0 failures.
+- `mvn package`: BUILD SUCCESS.
+- Tests cover creation, relationships, invariants, polymorphic behavior, and duplicate-seat prevention (model level).
+
 - All commands run on this machine before commit.

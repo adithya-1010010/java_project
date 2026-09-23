@@ -3,7 +3,7 @@
 | Phase | Description | Status | Commit |
 |---|---|---|---|
 | 01 | Project foundation and documentation | ✅ Complete | `phase-01: initialize JavaFX Maven project and project documentation` |
-| 02 | Domain model and OOP foundation | ⬜ Not started | — |
+| 02 | Domain model and OOP foundation | ✅ Complete | `phase-02: domain model and oop foundation` |
 | 03 | SQLite database and persistence foundation | ⬜ Not started | — |
 | 04 | Authentication | ⬜ Not started | — |
 | 05 | Movie and show modules | ⬜ Not started | — |
