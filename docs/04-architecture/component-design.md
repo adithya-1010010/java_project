@@ -1,11 +1,21 @@
 # Component Design
 
-Placeholder — finalized with the domain model in Phase 02 and persistence in Phase 03.
+## Repository layer (Phase 03)
 
-Planned components:
+| Component | Responsibility |
+|---|---|
+| `config.Database` | Path/URL, `open()` (FK on), `init()` (schema + seed) |
+| `config.Seeder` | Idempotent seat grids + demo users |
+| `MovieRepository` | Read movies |
+| `TheatreRepository` | Read theatres |
+| `ShowRepository` | Read shows (with movie + theatre) |
+| `SeatRepository` | Read grids, insert layout, mark booked |
+| `CustomerRepository` | Insert / read customers |
+| `UserRepository` | Insert / read by username (auth, Phase 04) |
+| `BookingRepository` | Transactional create, read by code / list |
 
-- `Main` — JavaFX entry point.
-- Controllers (per screen) — UI event handling.
-- Services — AuthService, MovieService, ShowService, SeatService, BookingService.
-- Repositories — MovieRepository, TheatreRepository, ShowRepository, SeatRepository, BookingRepository, UserRepository.
-- Validation — customer details, login input, seat selection rules.
+## Planned (later phases)
+
+Services: AuthService, MovieService, ShowService, SeatService, BookingService. Controllers per screen. Views per screen.
+
+Authority: [architecture.md](architecture.md).

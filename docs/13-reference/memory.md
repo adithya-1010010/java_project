@@ -56,7 +56,15 @@ Finalized in Phase 02 (all under `com.movieticketbooking.model`; pricing under `
 
 ## DB design decisions
 
-- Tables planned: users, movies, theatres, shows, seats, customers, bookings, booking_seats. Schema finalized in Phase 03.
+Finalized in Phase 03 (schema resources in `src/main/resources/schema.sql` / `seed.sql`):
+
+- Tables: `users`, `movies`, `theatres`, `shows`, `seats`, `customers`, `bookings`, `booking_seats`.
+- Money stored as **integer cents** (`util.Money`); timestamps as ISO-8601 text; `PRAGMA foreign_keys=ON` on every connection.
+- Duplicate-seat rule (REQ-08) DB level: `seats UNIQUE(show_id, row_label, column_number)` + `booking_seats UNIQUE(seat_id)` → (show, seat) bookable once; enforced transactionally in `BookingRepository.create` (rollback, no partial booking).
+- `Database.init()` runs idempotent schema+seed; `Seeder` adds 8×10 seat grids and demo users (SHA-256 hashes via `util.PasswordHasher`, no plaintext secrets).
+- Repositories: Movie, Theatre, Show, Seat, Customer, User, Booking. All take a `Connection` (except BookingRepository which manages its own transaction).
+- Catalog reads (`ShowRepository`) return shows without seats; `SeatRepository.findByShow` loads a show's grid when needed.
+- Added `Ticket.reconstruct` / `Booking.reconstruct` factories to load persisted entities.
 
 ## UI decisions
 
@@ -71,8 +79,9 @@ Finalized in Phase 02 (all under `com.movieticketbooking.model`; pricing under `
 
 - Completed: **Phase 01** (foundation + docs). Commit `phase-01: initialize JavaFX Maven project and project documentation`.
 - Completed: **Phase 02** (domain model + OOP foundation). Commit `phase-02: domain model and oop foundation`.
+- Completed: **Phase 03** (SQLite schema, seed data, persistence). Commit `phase-03: sqlite schema seed and persistence layer`.
 - Current: none in progress.
-- Next: **Phase 03** — SQLite schema, seed data, persistence layer (do NOT start automatically; only on explicit instruction).
+- Next: **Phase 04** — Authentication / login flow (do NOT start automatically; only on explicit instruction).
 
 ## Known limitations
 
@@ -89,5 +98,10 @@ Finalized in Phase 02 (all under `com.movieticketbooking.model`; pricing under `
 - `mvn test`: BUILD SUCCESS, 47 tests, 0 failures.
 - `mvn package`: BUILD SUCCESS.
 - Tests cover creation, relationships, invariants, polymorphic behavior, and duplicate-seat prevention (model level).
+
+## Phase-03 verification
+
+- `mvn test`: BUILD SUCCESS, 58 tests, 0 failures.
+- New: `DatabaseInitTest` (clean init, tables, seed, idempotency, layout uniqueness, FK) and `BookingPersistenceTest` (create/retrieve, duplicate-seat rollback, restart survival).
 
 - All commands run on this machine before commit.

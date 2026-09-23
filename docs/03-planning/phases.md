@@ -4,7 +4,7 @@
 |---|---|---|---|
 | 01 | Project foundation and documentation | ✅ Complete | `phase-01: initialize JavaFX Maven project and project documentation` |
 | 02 | Domain model and OOP foundation | ✅ Complete | `phase-02: domain model and oop foundation` |
-| 03 | SQLite database and persistence foundation | ⬜ Not started | — |
+| 03 | SQLite database and persistence foundation | ✅ Complete | `phase-03: sqlite schema seed and persistence layer` |
 | 04 | Authentication | ⬜ Not started | — |
 | 05 | Movie and show modules | ⬜ Not started | — |
 | 06 | Seat management | ⬜ Not started | — |

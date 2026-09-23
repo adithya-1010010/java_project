@@ -4,7 +4,7 @@ A Java 17 / JavaFX desktop application for browsing movies, selecting shows and 
 
 ## Status
 
-Phase 02 complete — domain model and OOP foundation. Phase 01 (project foundation) and Phase 02 (domain model) done. See [implementation plan](docs/03-planning/implementation-plan.md) and [phase status](docs/03-planning/phases.md).
+Phase 03 complete — SQLite schema, seed data, and persistence layer (Phases 01–03 done). See [implementation plan](docs/03-planning/implementation-plan.md) and [phase status](docs/03-planning/phases.md).
 
 ## Requirements
 

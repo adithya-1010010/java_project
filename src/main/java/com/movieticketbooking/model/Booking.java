@@ -16,6 +16,16 @@ public class Booking {
     private boolean confirmed;
 
     public Booking(long id, Customer customer, Show show, List<Seat> seats, Ticket ticket) {
+        this(id, customer, show, seats, ticket, LocalDateTime.now(), null, false);
+    }
+
+    public static Booking reconstruct(long id, Customer customer, Show show, List<Seat> seats, Ticket ticket,
+                                      String bookingCode, LocalDateTime createdAt) {
+        return new Booking(id, customer, show, seats, ticket, createdAt, bookingCode, true);
+    }
+
+    private Booking(long id, Customer customer, Show show, List<Seat> seats, Ticket ticket,
+                    LocalDateTime createdAt, String bookingCode, boolean confirmed) {
         if (customer == null) {
             throw new IllegalArgumentException("customer must not be null");
         }
@@ -27,6 +37,9 @@ public class Booking {
         }
         if (ticket == null) {
             throw new IllegalArgumentException("ticket must not be null");
+        }
+        if (createdAt == null) {
+            throw new IllegalArgumentException("createdAt must not be null");
         }
         List<Seat> unique = new ArrayList<>();
         for (Seat seat : seats) {
@@ -43,8 +56,9 @@ public class Booking {
         this.show = show;
         this.seats = List.copyOf(unique);
         this.ticket = ticket;
-        this.createdAt = LocalDateTime.now();
-        this.confirmed = false;
+        this.createdAt = createdAt;
+        this.bookingCode = bookingCode;
+        this.confirmed = confirmed;
     }
 
     public long getId() {

@@ -14,17 +14,15 @@ public class Ticket {
 
     public Ticket(Show show, List<Seat> seats, BigDecimal baseUnitPrice,
                   com.movieticketbooking.model.pricing.PricingStrategy strategy) {
+        this(show, seats, requireUnitPrice(baseUnitPrice), requireStrategy(strategy).price(baseUnitPrice, seats.size()));
+    }
+
+    private Ticket(Show show, List<Seat> seats, BigDecimal unitPrice, BigDecimal total) {
         if (show == null) {
             throw new IllegalArgumentException("show must not be null");
         }
         if (seats == null || seats.isEmpty()) {
             throw new IllegalArgumentException("at least one seat is required");
-        }
-        if (baseUnitPrice == null || baseUnitPrice.signum() < 0) {
-            throw new IllegalArgumentException("baseUnitPrice must be a non-negative value");
-        }
-        if (strategy == null) {
-            throw new IllegalArgumentException("pricing strategy must not be null");
         }
         List<Seat> unique = new ArrayList<>();
         for (Seat seat : seats) {
@@ -39,8 +37,30 @@ public class Ticket {
         this.show = show;
         this.seats = List.copyOf(unique);
         this.quantity = unique.size();
-        this.unitPrice = baseUnitPrice;
-        this.total = strategy.price(baseUnitPrice, quantity);
+        this.unitPrice = unitPrice;
+        this.total = total;
+    }
+
+    public static Ticket reconstruct(Show show, List<Seat> seats, BigDecimal unitPrice, BigDecimal total) {
+        if (total == null || total.signum() < 0) {
+            throw new IllegalArgumentException("total must be a non-negative value");
+        }
+        return new Ticket(show, seats, requireUnitPrice(unitPrice), total);
+    }
+
+    private static BigDecimal requireUnitPrice(BigDecimal baseUnitPrice) {
+        if (baseUnitPrice == null || baseUnitPrice.signum() < 0) {
+            throw new IllegalArgumentException("baseUnitPrice must be a non-negative value");
+        }
+        return baseUnitPrice;
+    }
+
+    private static com.movieticketbooking.model.pricing.PricingStrategy requireStrategy(
+            com.movieticketbooking.model.pricing.PricingStrategy strategy) {
+        if (strategy == null) {
+            throw new IllegalArgumentException("pricing strategy must not be null");
+        }
+        return strategy;
     }
 
     public Show getShow() {
