@@ -6,7 +6,7 @@
 | 02 | Domain model and OOP foundation | ✅ Complete | `phase-02: domain model and oop foundation` |
 | 03 | SQLite database and persistence foundation | ✅ Complete | `phase-03: sqlite schema seed and persistence layer` |
 | 04 | Authentication | ✅ Complete | `phase-04: local authentication and login flow` |
-| 05 | Movie and show modules | ⬜ Not started | — |
+| 05 | Movie and show modules | ✅ Complete | `phase-05: movie and show modules` |
 | 06 | Seat management | ⬜ Not started | — |
 | 07 | Booking and ticket calculation | ⬜ Not started | — |
 | 08 | Complete confirmation / ticket module | ⬜ Not started | — |

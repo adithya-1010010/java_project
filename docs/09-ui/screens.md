@@ -21,3 +21,28 @@ Per-screen documentation is added as each screen is implemented. Template fields
 - **Navigation:** (Phase 05) → Movie listing.
 - **Controller:** `HomeController`.
 - **Data loaded:** `User` (from login).
+
+## Home (Phase 05)
+
+- **Controls:** welcome `Label`, "Browse Movies" button.
+- **Navigation:** → Movie listing.
+
+## Movie listing (Phase 05)
+
+- **Purpose:** Browse available movies with genre and price.
+- **Controls:** movie `ListView` (title | genre | $price | duration), Select Movie, Back.
+- **Validation:** none (empty state handled: "No movies available.").
+- **Navigation:** Select → Show selection; Back → Home.
+- **Controller:** `MovieListController`.
+- **Service calls:** `MovieService.listMovies`.
+- **Data loaded:** movies from SQLite.
+
+## Show selection (Phase 05)
+
+- **Purpose:** Pick a show timing for the selected movie.
+- **Controls:** show `ListView` (theatre + location | start time), Select Show, Back to Movies.
+- **Validation:** none (empty state handled).
+- **Navigation:** Select → Seat selection (Phase 06); Back → Movie listing.
+- **Controller:** `ShowController`.
+- **Service calls:** `ShowService.showsForMovie`.
+- **Data loaded:** shows (with movie + theatre) filtered by movie.

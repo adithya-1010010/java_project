@@ -1,7 +1,7 @@
 # Movie Module
 
 - **Purpose:** Display available movies, genres, and ticket prices; navigate to show selection.
-- **Status:** Not implemented (Phase 05).
-- **Requirements:** REQ-02, REQ-03, REQ-05.
-- **Components:** MovieRepository, MovieService, movie list/detail UI.
-- **Service calls:** list movies, get shows for movie.
+- **Status:** Implemented (Phase 05).
+- **Requirements:** REQ-02, REQ-03, REQ-05 (partially — selection done; seat refinement later).
+- **Components:** `MovieService`, `MovieListController`, `ShowController`.
+- **Service calls:** `MovieService.listMovies`, `ShowService.showsForMovie`.

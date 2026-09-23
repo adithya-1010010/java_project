@@ -84,14 +84,23 @@ Finalized in Phase 03 (schema resources in `src/main/resources/schema.sql` / `se
 - DB location for the app: `~/.movieticket/movieticket.db`.
 - Demo accounts: `demo`/`demo123`, `alice`/`alice123` (SHA-256 seeded, no plaintext in source).
 
+## Movie / show modules (Phase 05)
+
+- `service.MovieService` (listMovies, findById) and `service.ShowService` (showsForMovie) wrap repositories.
+- Screens: Home ("Browse Movies") → `MovieListController` (movie ListView w/ genre + price) → `ShowController` (theatre + time).
+- Show selection currently navigates to a `PlaceholderController` note; replaced by seat grid in Phase 06.
+- `Main` holds Stage logic: login → home → movies → shows (with current `User`).
+- MovieServiceTest/ShowServiceTest added (71 tests total).
+
 ## Completed / current / next
 
 - Completed: **Phase 01** (foundation + docs). Commit `phase-01: initialize JavaFX Maven project and project documentation`.
 - Completed: **Phase 02** (domain model + OOP foundation). Commit `phase-02: domain model and oop foundation`.
 - Completed: **Phase 03** (SQLite schema, seed data, persistence). Commit `phase-03: sqlite schema seed and persistence layer`.
 - Completed: **Phase 04** (authentication + login flow). Commit `phase-04: local authentication and login flow`.
+- Completed: **Phase 05** (movie + show modules). Commit `phase-05: movie and show modules`.
 - Current: none in progress.
-- Next: **Phase 05** — Movie, theatre, and show modules (do NOT start automatically; only on explicit instruction).
+- Next: **Phase 06** — Seat grid and availability (continuing automatically per project instruction; phases proceed without permission checks).
 
 ## Known limitations
 
@@ -119,5 +128,11 @@ Finalized in Phase 03 (schema resources in `src/main/resources/schema.sql` / `se
 - `mvn test`: BUILD SUCCESS, 65 tests, 0 failures.
 - New: `AuthenticationServiceTest` (valid/wrong/unknown/blank) and `LoginGateTest` (failed login never enters app).
 - `mvn javafx:run`: login window opened. Manual: valid creds → home; invalid → error stays on login.
+
+## Phase-05 verification
+
+- `mvn test`: BUILD SUCCESS, 71 tests, 0 failures.
+- New: `MovieServiceTest` (seed load, metadata, by id) and `ShowServiceTest` (filter by movie, theatre/timing, unknown movie).
+- `mvn javafx:run`: app opened with full movie → show navigation.
 
 - All commands run on this machine before commit.
