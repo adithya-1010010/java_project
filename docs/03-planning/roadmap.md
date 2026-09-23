@@ -6,7 +6,7 @@ Phase 02  Domain model + OOP design + unit tests                          ← do
 Phase 03  SQLite schema, seed data, repository layer                      ← done
 Phase 04  Authentication (login)                                          ← done
 Phase 05  Movie + theatre + show modules (browse)                         ← done
-Phase 06  Seat grid + availability
+Phase 06  Seat grid + availability                                         ← done
 Phase 07  Booking workflow + ticket calculation (transactional)
 Phase 08  Confirmation / ticket display
 Phase 09  End-to-end integration and validation

@@ -37,6 +37,16 @@ Per-screen documentation is added as each screen is implemented. Template fields
 - **Service calls:** `MovieService.listMovies`.
 - **Data loaded:** movies from SQLite.
 
+## Seat selection (Phase 06)
+
+- **Purpose:** Pick available seats on a row/column grid.
+- **Controls:** seat `ToggleButton` grid, go legend (Available/Selected/Booked), Continue, Back.
+- **Validation:** booked seats are disabled; Continue enabled only when ≥ 1 seat selected.
+- **Navigation:** Continue → Customer details (Phase 07); Back → Show selection.
+- **Controller:** `SeatController`.
+- **Service calls:** `SeatService.seatsForShow`.
+- **Data loaded:** show's seat grid incl. booked state.
+
 ## Show selection (Phase 05)
 
 - **Purpose:** Pick a show timing for the selected movie.

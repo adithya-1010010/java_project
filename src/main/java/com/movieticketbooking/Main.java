@@ -5,12 +5,16 @@ import com.movieticketbooking.controller.HomeController;
 import com.movieticketbooking.controller.LoginController;
 import com.movieticketbooking.controller.MovieListController;
 import com.movieticketbooking.controller.PlaceholderController;
+import com.movieticketbooking.controller.SeatController;
 import com.movieticketbooking.controller.ShowController;
+import com.movieticketbooking.model.Seat;
 import com.movieticketbooking.model.Show;
 import com.movieticketbooking.model.User;
 import com.movieticketbooking.service.AuthenticationService;
 import com.movieticketbooking.service.MovieService;
+import com.movieticketbooking.service.SeatService;
 import com.movieticketbooking.service.ShowService;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -18,6 +22,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class Main extends Application {
 
@@ -26,6 +31,7 @@ public class Main extends Application {
     private Database database;
     private MovieService movieService;
     private ShowService showService;
+    private SeatService seatService;
 
     @Override
     public void start(Stage stage) {
@@ -34,6 +40,7 @@ public class Main extends Application {
         this.database.init();
         this.movieService = new MovieService(database);
         this.showService = new ShowService(database);
+        this.seatService = new SeatService(database);
 
         AuthenticationService authenticationService = new AuthenticationService(database);
         LoginController login = new LoginController(authenticationService, this::authenticated);
@@ -64,20 +71,22 @@ public class Main extends Application {
     }
 
     private void showShows(com.movieticketbooking.model.Movie movie) {
-        ShowController shows = new ShowController(
-                showService,
-                this::showSeatPlaceholder,
-                this::showMovies);
+        ShowController shows = new ShowController(showService, this::showSeats, this::showMovies);
         stage.setScene(shows.createScene(movie.getId(), movie.getTitle()));
     }
 
-    private void showSeatPlaceholder(Show show) {
-        stage.setScene(new PlaceholderController(this::showShowsBack)
-                .createScene("Seat selection is coming in the next phase."));
+    private void showSeats(Show show) {
+        SeatController seats = new SeatController(seatService, this::bookingPlaceholder, this::showMovies);
+        stage.setScene(seats.createScene(show));
     }
 
-    private void showShowsBack() {
-        showMovies();
+    private void bookingPlaceholder(List<Seat> seats) {
+        stage.setScene(new PlaceholderController(this::showMovies)
+                .createScene("Booking comes in the next phase. Selected: " + seatLabels(seats) + "."));
+    }
+
+    private String seatLabels(List<Seat> seats) {
+        return seats.stream().map(Seat::getLabel).reduce((a, b) -> a + ", " + b).orElse("none");
     }
 
     private String defaultDatabasePath() {

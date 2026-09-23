@@ -92,6 +92,13 @@ Finalized in Phase 03 (schema resources in `src/main/resources/schema.sql` / `se
 - `Main` holds Stage logic: login → home → movies → shows (with current `User`).
 - MovieServiceTest/ShowServiceTest added (71 tests total).
 
+## Seat management (Phase 06)
+
+- `model.SeatSelection` — pure toggle model (available only; booked/null rejected; multi-select; deselect; clear).
+- `service.SeatService.seatsForShow(showId)` — loads grid incl. BOOKED state from DB.
+- `controller.SeatController` — grid of ToggleButtons (disabled grey for booked; blue↔green toggle), legend, Continue gated on selection.
+- `Main`: movie → show → seat grid; Continue → placeholder until Phase 07.
+
 ## Completed / current / next
 
 - Completed: **Phase 01** (foundation + docs). Commit `phase-01: initialize JavaFX Maven project and project documentation`.
@@ -99,8 +106,9 @@ Finalized in Phase 03 (schema resources in `src/main/resources/schema.sql` / `se
 - Completed: **Phase 03** (SQLite schema, seed data, persistence). Commit `phase-03: sqlite schema seed and persistence layer`.
 - Completed: **Phase 04** (authentication + login flow). Commit `phase-04: local authentication and login flow`.
 - Completed: **Phase 05** (movie + show modules). Commit `phase-05: movie and show modules`.
+- Completed: **Phase 06** (seat grid + availability). Commit `phase-06: seat grid and availability`.
 - Current: none in progress.
-- Next: **Phase 06** — Seat grid and availability (continuing automatically per project instruction; phases proceed without permission checks).
+- Next: **Phase 07** — Booking workflow + ticket calculation (continuing automatically).
 
 ## Known limitations
 
