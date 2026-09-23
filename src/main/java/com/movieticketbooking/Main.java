@@ -1,16 +1,21 @@
 package com.movieticketbooking;
 
 import com.movieticketbooking.config.Database;
+import com.movieticketbooking.controller.BookingSummaryController;
+import com.movieticketbooking.controller.CustomerController;
 import com.movieticketbooking.controller.HomeController;
 import com.movieticketbooking.controller.LoginController;
 import com.movieticketbooking.controller.MovieListController;
 import com.movieticketbooking.controller.PlaceholderController;
 import com.movieticketbooking.controller.SeatController;
 import com.movieticketbooking.controller.ShowController;
+import com.movieticketbooking.model.Booking;
+import com.movieticketbooking.model.Customer;
 import com.movieticketbooking.model.Seat;
 import com.movieticketbooking.model.Show;
 import com.movieticketbooking.model.User;
 import com.movieticketbooking.service.AuthenticationService;
+import com.movieticketbooking.service.BookingService;
 import com.movieticketbooking.service.MovieService;
 import com.movieticketbooking.service.SeatService;
 import com.movieticketbooking.service.ShowService;
@@ -32,6 +37,7 @@ public class Main extends Application {
     private MovieService movieService;
     private ShowService showService;
     private SeatService seatService;
+    private BookingService bookingService;
 
     @Override
     public void start(Stage stage) {
@@ -41,6 +47,7 @@ public class Main extends Application {
         this.movieService = new MovieService(database);
         this.showService = new ShowService(database);
         this.seatService = new SeatService(database);
+        this.bookingService = new BookingService(database);
 
         AuthenticationService authenticationService = new AuthenticationService(database);
         LoginController login = new LoginController(authenticationService, this::authenticated);
@@ -76,17 +83,39 @@ public class Main extends Application {
     }
 
     private void showSeats(Show show) {
-        SeatController seats = new SeatController(seatService, this::bookingPlaceholder, this::showMovies);
+        SeatController seats = new SeatController(
+                seatService,
+                selected -> showCustomerDetails(show, selected),
+                this::showMovies);
         stage.setScene(seats.createScene(show));
     }
 
-    private void bookingPlaceholder(List<Seat> seats) {
-        stage.setScene(new PlaceholderController(this::showMovies)
-                .createScene("Booking comes in the next phase. Selected: " + seatLabels(seats) + "."));
+    private void showCustomerDetails(Show show, List<Seat> seats) {
+        CustomerController form = new CustomerController(
+                (customer, selected) -> showReview(show, selected, customer),
+                () -> showSeats(show));
+        stage.setScene(form.createScene(show, seats));
     }
 
-    private String seatLabels(List<Seat> seats) {
-        return seats.stream().map(Seat::getLabel).reduce((a, b) -> a + ", " + b).orElse("none");
+    private void showReview(Show show, List<Seat> seats, Customer customer) {
+        BookingSummaryController summary = new BookingSummaryController(
+                () -> confirmBooking(show, seats, customer),
+                () -> showCustomerDetails(show, seats));
+        stage.setScene(summary.createScene(show, customer, seats));
+    }
+
+    private void confirmBooking(Show show, List<Seat> seats, Customer customer) {
+        try {
+            Booking booking = bookingService.confirmBooking(customer, show, seats);
+            stage.setScene(new PlaceholderController(this::showHome)
+                    .createScene("Booking recorded — ID " + booking.getBookingCode()
+                            + " | " + booking.getTicket().getQuantity() + " ticket(s) | $"
+                            + booking.getTicket().getTotal().toPlainString()
+                            + "\nFull ticket details arrive in the next phase."));
+        } catch (IllegalStateException e) {
+            stage.setScene(new PlaceholderController(() -> showSeats(show))
+                    .createScene(e.getMessage() + "\nPlease select different seats."));
+        }
     }
 
     private String defaultDatabasePath() {

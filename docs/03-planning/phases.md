@@ -8,7 +8,7 @@
 | 04 | Authentication | ✅ Complete | `phase-04: local authentication and login flow` |
 | 05 | Movie and show modules | ✅ Complete | `phase-05: movie and show modules` |
 | 06 | Seat management | ✅ Complete | `phase-06: seat grid and availability` |
-| 07 | Booking and ticket calculation | ⬜ Not started | — |
+| 07 | Booking and ticket calculation | ✅ Complete | `phase-07: implement booking workflow and ticket calculation` |
 | 08 | Complete confirmation / ticket module | ⬜ Not started | — |
 | 09 | End-to-end integration and validation | ⬜ Not started | — |
 | 10 | Quality, polish, documentation, and final acceptance | ⬜ Not started | — |

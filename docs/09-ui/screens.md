@@ -47,6 +47,24 @@ Per-screen documentation is added as each screen is implemented. Template fields
 - **Service calls:** `SeatService.seatsForShow`.
 - **Data loaded:** show's seat grid incl. booked state.
 
+## Customer details (Phase 07)
+
+- **Purpose:** Enter the booker's details.
+- **Controls:** full name, email, phone (optional) `TextField`s, Review Booking, Back to Seats.
+- **Validation:** non-blank name, valid email (from `Person`); errors inline.
+- **Navigation:** Review → Booking summary; Back → Seat selection.
+- **Controller:** `CustomerController`.
+
+## Booking summary (Phase 07)
+
+- **Purpose:** Review and confirm the booking before persistence.
+- **Controls:** customer, movie/genre, theatre, show time, seats, unit price, tickets, total; Confirm Booking, Back.
+- **Validation:** none beyond prior steps.
+- **Navigation:** Confirm → Booking recorded (booking ID; full confirmation Phase 08); Back → Customer details.
+- **Controller:** `BookingSummaryController`.
+- **Service calls:** `BookingService.confirmBooking` (on confirm).
+- **Data loaded:** show, seats, customer, `Ticket` total.
+
 ## Show selection (Phase 05)
 
 - **Purpose:** Pick a show timing for the selected movie.

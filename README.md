@@ -4,7 +4,7 @@ A Java 17 / JavaFX desktop application for browsing movies, selecting shows and 
 
 ## Status
 
-Phase 06 complete — seat grid and availability (Phases 01–06 done). See [implementation plan](docs/03-planning/implementation-plan.md) and [phase status](docs/03-planning/phases.md).
+Phase 07 complete — booking workflow and ticket calculation (Phases 01–07 done). See [implementation plan](docs/03-planning/implementation-plan.md) and [phase status](docs/03-planning/phases.md).
 
 Demo login: `demo` / `demo123` (or `alice` / `alice123`).
 

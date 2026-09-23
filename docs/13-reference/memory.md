@@ -99,6 +99,25 @@ Finalized in Phase 03 (schema resources in `src/main/resources/schema.sql` / `se
 - `controller.SeatController` — grid of ToggleButtons (disabled grey for booked; blue↔green toggle), legend, Continue gated on selection.
 - `Main`: movie → show → seat grid; Continue → placeholder until Phase 07.
 
+## Phase-05 verification
+
+- `mvn test`: BUILD SUCCESS, 71 tests, 0 failures.
+
+## Booking workflow (Phase 07)
+
+- `service.BookingService.confirmBooking(customer, show, seats)`:
+  - seat membership checked by **DB id** (position-based `Seat.equals` alone would let a foreign show's seat map onto the same position).
+  - availability re-checked by reloading the show's seats from the DB immediately before persistence.
+  - `Ticket` via `StandardPricing`; persistence via transactional `BookingRepository.create`; `BK-…` code generated in the repository.
+- `controller.CustomerController` (name/email/phone form) and `controller.BookingSummaryController` (review + confirm).
+- `Main`: seat grid → customer → review → confirm; failures return to a fresh seat grid.
+- Test note: `BookingPersistenceTest` exercises the repository-level uniqueness conflict; `BookingServiceTest` adds the service-level checks (89 tests total).
+
+## Phase-07 verification
+
+- `mvn test`: BUILD SUCCESS, 89 tests, 0 failures.
+- `mvn javafx:run`: app opened; seat → customer → review flow reachable.
+
 ## Completed / current / next
 
 - Completed: **Phase 01** (foundation + docs). Commit `phase-01: initialize JavaFX Maven project and project documentation`.
@@ -107,8 +126,9 @@ Finalized in Phase 03 (schema resources in `src/main/resources/schema.sql` / `se
 - Completed: **Phase 04** (authentication + login flow). Commit `phase-04: local authentication and login flow`.
 - Completed: **Phase 05** (movie + show modules). Commit `phase-05: movie and show modules`.
 - Completed: **Phase 06** (seat grid + availability). Commit `phase-06: seat grid and availability`.
+- Completed: **Phase 07** (booking + ticket calc). Commit `phase-07: implement booking workflow and ticket calculation`.
 - Current: none in progress.
-- Next: **Phase 07** — Booking workflow + ticket calculation (continuing automatically).
+- Next: **Phase 08** — Complete confirmation / ticket module (continuing automatically).
 
 ## Known limitations
 
