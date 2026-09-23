@@ -10,7 +10,7 @@
 | 06 | Seat management | ✅ Complete | `phase-06: seat grid and availability` |
 | 07 | Booking and ticket calculation | ✅ Complete | `phase-07: implement booking workflow and ticket calculation` |
 | 08 | Complete confirmation / ticket module | ✅ Complete | `phase-08: complete booking confirmation and ticket display` |
-| 09 | End-to-end integration and validation | ⬜ Not started | — |
+| 09 | End-to-end integration and validation | ✅ Complete | `phase-09: integrate and validate complete booking flow` |
 | 10 | Quality, polish, documentation, and final acceptance | ⬜ Not started | — |
 
 Details per phase: `docs/12-phases/phase-NN.md`.

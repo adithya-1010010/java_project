@@ -119,6 +119,17 @@ Finalized in Phase 03 (schema resources in `src/main/resources/schema.sql` / `se
 - `Main.confirmBooking` routes to confirmation on success; availability failures return to a fresh seat grid.
 - `ConfirmationDataTest` verifies confirmation data matches the saved booking across a restart and that a fresh grid still allows a clean new booking.
 
+## End-to-end validation (Phase 09)
+
+- `integration.E2eFlowTest` drives the full journey against a real SQLite file: happy path, invalid login, invalid booking inputs, cross-session duplicate prevention, restart persistence + post-restart duplicate protection, empty states.
+- `DatabaseInitTest` adds a blocked-path failure test (`IllegalStateException`).
+- Full suite: 98 tests, 0 failures.
+
+## Phase-09 verification
+
+- `mvn test`: BUILD SUCCESS, 98 tests, 0 failures.
+- `mvn javafx:run`: app opened (UI smoke).
+
 ## Phase-08 verification
 
 - `mvn test`: BUILD SUCCESS, 91 tests, 0 failures.
@@ -139,8 +150,9 @@ Finalized in Phase 03 (schema resources in `src/main/resources/schema.sql` / `se
 - Completed: **Phase 06** (seat grid + availability). Commit `phase-06: seat grid and availability`.
 - Completed: **Phase 07** (booking + ticket calc). Commit `phase-07: implement booking workflow and ticket calculation`.
 - Completed: **Phase 08** (confirmation + ticket display). Commit `phase-08: complete booking confirmation and ticket display`.
+- Completed: **Phase 09** (end-to-end integration + validation). Commit `phase-09: integrate and validate complete booking flow`.
 - Current: none in progress.
-- Next: **Phase 09** — End-to-end integration and validation (continuing automatically).
+- Next: **Phase 10** — Quality, polish, documentation, final acceptance (continuing automatically).
 
 ## Known limitations
 

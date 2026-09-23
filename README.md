@@ -4,7 +4,7 @@ A Java 17 / JavaFX desktop application for browsing movies, selecting shows and 
 
 ## Status
 
-Phase 08 complete — booking confirmation and ticket display (Phases 01–08 done). See [implementation plan](docs/03-planning/implementation-plan.md) and [phase status](docs/03-planning/phases.md).
+Phase 09 complete — end-to-end integration and validation (Phases 01–09 done); Phase 10 (final acceptance) remaining. See [implementation plan](docs/03-planning/implementation-plan.md) and [phase status](docs/03-planning/phases.md).
 
 Demo login: `demo` / `demo123` (or `alice` / `alice123`).
 

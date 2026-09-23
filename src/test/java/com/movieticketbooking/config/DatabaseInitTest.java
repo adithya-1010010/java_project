@@ -10,6 +10,8 @@ import com.movieticketbooking.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -137,6 +139,15 @@ class DatabaseInitTest {
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
+    }
+
+    @Test
+    void initFailureIsReportedWhenDatabaseCannotBeCreated() throws Exception {
+        Path blocker = dir.resolve("block");
+        Files.write(blocker, "a file, not a directory".getBytes(StandardCharsets.UTF_8));
+        Database database = new Database(blocker.resolve("db.sqlite").toString());
+
+        assertThrows(IllegalStateException.class, database::init);
     }
 
     private Database newDatabase() {
