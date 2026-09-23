@@ -75,13 +75,23 @@ Finalized in Phase 03 (schema resources in `src/main/resources/schema.sql` / `se
 - `context.md` says "OOP Module — Uses classes, objects, inheritance, and polymorphism **in JavaScript**" — treated as a typo; project is Java.
 - `context.md` "Theatre and show timings" management is scoped to customer-facing listing/selection initially.
 
+## Authentication design (Phase 04)
+
+- `service.AuthenticationService.authenticate(username, password)` — rejects blanks, SHA-256-hashes candidate, constant-time compares to stored hash (`UserRepository.findByUsername`).
+- `controller.LoginGate` — enters the app only on success (testable, no JavaFX needed).
+- `controller.LoginController` — JavaFX login scene → home on success, error stays on login otherwise.
+- `controller.HomeController` — minimal greeting screen (browse UI is Phase 05).
+- DB location for the app: `~/.movieticket/movieticket.db`.
+- Demo accounts: `demo`/`demo123`, `alice`/`alice123` (SHA-256 seeded, no plaintext in source).
+
 ## Completed / current / next
 
 - Completed: **Phase 01** (foundation + docs). Commit `phase-01: initialize JavaFX Maven project and project documentation`.
 - Completed: **Phase 02** (domain model + OOP foundation). Commit `phase-02: domain model and oop foundation`.
 - Completed: **Phase 03** (SQLite schema, seed data, persistence). Commit `phase-03: sqlite schema seed and persistence layer`.
+- Completed: **Phase 04** (authentication + login flow). Commit `phase-04: local authentication and login flow`.
 - Current: none in progress.
-- Next: **Phase 04** — Authentication / login flow (do NOT start automatically; only on explicit instruction).
+- Next: **Phase 05** — Movie, theatre, and show modules (do NOT start automatically; only on explicit instruction).
 
 ## Known limitations
 
@@ -103,5 +113,11 @@ Finalized in Phase 03 (schema resources in `src/main/resources/schema.sql` / `se
 
 - `mvn test`: BUILD SUCCESS, 58 tests, 0 failures.
 - New: `DatabaseInitTest` (clean init, tables, seed, idempotency, layout uniqueness, FK) and `BookingPersistenceTest` (create/retrieve, duplicate-seat rollback, restart survival).
+
+## Phase-04 verification
+
+- `mvn test`: BUILD SUCCESS, 65 tests, 0 failures.
+- New: `AuthenticationServiceTest` (valid/wrong/unknown/blank) and `LoginGateTest` (failed login never enters app).
+- `mvn javafx:run`: login window opened. Manual: valid creds → home; invalid → error stays on login.
 
 - All commands run on this machine before commit.

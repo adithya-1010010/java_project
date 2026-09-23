@@ -4,7 +4,7 @@
 Phase 01  Foundation (Maven/JavaFX/JUnit/SQLite deps, docs skeleton)     ← done
 Phase 02  Domain model + OOP design + unit tests                          ← done
 Phase 03  SQLite schema, seed data, repository layer                      ← done
-Phase 04  Authentication (login)
+Phase 04  Authentication (login)                                          ← done
 Phase 05  Movie + theatre + show modules (browse)
 Phase 06  Seat grid + availability
 Phase 07  Booking workflow + ticket calculation (transactional)

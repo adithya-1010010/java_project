@@ -14,8 +14,17 @@
 | `UserRepository` | Insert / read by username (auth, Phase 04) |
 | `BookingRepository` | Transactional create, read by code / list |
 
+## Service layer (Phase 04)
+
+| Component | Responsibility |
+|---|---|
+| `service.AuthenticationService` | Hash + verify credentials against `users` |
+| `controller.LoginGate` | Enter app only on successful authentication |
+| `controller.LoginController` | Login screen + error handling |
+| `controller.HomeController` | Minimal home greeting screen |
+
 ## Planned (later phases)
 
-Services: AuthService, MovieService, ShowService, SeatService, BookingService. Controllers per screen. Views per screen.
+Services: MovieService, ShowService, SeatService, BookingService. Controllers/views for movie, show, seat, customer, summary, confirmation screens.
 
 Authority: [architecture.md](architecture.md).

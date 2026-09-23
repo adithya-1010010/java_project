@@ -4,7 +4,7 @@ Requirement-to-test traceability is kept current here and in `docs/02-requiremen
 
 | Req | Test cases | Status |
 |---|---|---|
-| REQ-01 | Valid / invalid / empty credentials; no entry on failed login | Phase 04 |
+| REQ-01 | Valid / invalid / empty credentials; no entry on failed login | ✅ Done (Phase 04) |
 | REQ-02/03 | Movies load; metadata correct; empty state handled | Phase 05 |
 | REQ-04/05 | Shows filtered by movie; invalid state handled | Phase 05 |
 | REQ-06/07 | Correct grid; available selectable; booked blocked | Phase 06 |

@@ -4,7 +4,9 @@ A Java 17 / JavaFX desktop application for browsing movies, selecting shows and 
 
 ## Status
 
-Phase 03 complete — SQLite schema, seed data, and persistence layer (Phases 01–03 done). See [implementation plan](docs/03-planning/implementation-plan.md) and [phase status](docs/03-planning/phases.md).
+Phase 04 complete — local authentication and login flow (Phases 01–04 done). See [implementation plan](docs/03-planning/implementation-plan.md) and [phase status](docs/03-planning/phases.md).
+
+Demo login: `demo` / `demo123` (or `alice` / `alice123`).
 
 ## Requirements
 
