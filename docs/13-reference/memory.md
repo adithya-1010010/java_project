@@ -113,6 +113,17 @@ Finalized in Phase 03 (schema resources in `src/main/resources/schema.sql` / `se
 - `Main`: seat grid → customer → review → confirm; failures return to a fresh seat grid.
 - Test note: `BookingPersistenceTest` exercises the repository-level uniqueness conflict; `BookingServiceTest` adds the service-level checks (89 tests total).
 
+## Confirmation (Phase 08)
+
+- `controller.ConfirmationController` — displays the persisted booking: code, customer, movie/genre, theatre, show time, seats, quantity, unit/total, booked-at; buttons `New Booking` → `Main.showMovies()` (fresh session reset) and `Back to Home`.
+- `Main.confirmBooking` routes to confirmation on success; availability failures return to a fresh seat grid.
+- `ConfirmationDataTest` verifies confirmation data matches the saved booking across a restart and that a fresh grid still allows a clean new booking.
+
+## Phase-08 verification
+
+- `mvn test`: BUILD SUCCESS, 91 tests, 0 failures.
+- `mvn javafx:run`: app opened; full seat → customer → review → confirm → confirmation flow reachable.
+
 ## Phase-07 verification
 
 - `mvn test`: BUILD SUCCESS, 89 tests, 0 failures.
@@ -127,8 +138,9 @@ Finalized in Phase 03 (schema resources in `src/main/resources/schema.sql` / `se
 - Completed: **Phase 05** (movie + show modules). Commit `phase-05: movie and show modules`.
 - Completed: **Phase 06** (seat grid + availability). Commit `phase-06: seat grid and availability`.
 - Completed: **Phase 07** (booking + ticket calc). Commit `phase-07: implement booking workflow and ticket calculation`.
+- Completed: **Phase 08** (confirmation + ticket display). Commit `phase-08: complete booking confirmation and ticket display`.
 - Current: none in progress.
-- Next: **Phase 08** — Complete confirmation / ticket module (continuing automatically).
+- Next: **Phase 09** — End-to-end integration and validation (continuing automatically).
 
 ## Known limitations
 

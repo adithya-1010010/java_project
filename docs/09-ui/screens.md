@@ -65,6 +65,15 @@ Per-screen documentation is added as each screen is implemented. Template fields
 - **Service calls:** `BookingService.confirmBooking` (on confirm).
 - **Data loaded:** show, seats, customer, `Ticket` total.
 
+## Booking confirmation (Phase 08)
+
+- **Purpose:** Show the booking ID and complete ticket details.
+- **Controls:** welcome/confirm label, booking code, detail grid (customer, movie, theatre, show time, seats, tickets, unit price, total, booked-at), New Booking, Back to Home.
+- **Validation:** none.
+- **Navigation:** New Booking → fresh Movie listing; Back to Home.
+- **Controller:** `ConfirmationController`.
+- **Data loaded:** persisted `Booking` from `BookingService.confirmBooking`.
+
 ## Show selection (Phase 05)
 
 - **Purpose:** Pick a show timing for the selected movie.

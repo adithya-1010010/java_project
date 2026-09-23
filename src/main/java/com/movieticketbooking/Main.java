@@ -2,6 +2,7 @@ package com.movieticketbooking;
 
 import com.movieticketbooking.config.Database;
 import com.movieticketbooking.controller.BookingSummaryController;
+import com.movieticketbooking.controller.ConfirmationController;
 import com.movieticketbooking.controller.CustomerController;
 import com.movieticketbooking.controller.HomeController;
 import com.movieticketbooking.controller.LoginController;
@@ -107,11 +108,8 @@ public class Main extends Application {
     private void confirmBooking(Show show, List<Seat> seats, Customer customer) {
         try {
             Booking booking = bookingService.confirmBooking(customer, show, seats);
-            stage.setScene(new PlaceholderController(this::showHome)
-                    .createScene("Booking recorded — ID " + booking.getBookingCode()
-                            + " | " + booking.getTicket().getQuantity() + " ticket(s) | $"
-                            + booking.getTicket().getTotal().toPlainString()
-                            + "\nFull ticket details arrive in the next phase."));
+            ConfirmationController confirmation = new ConfirmationController(this::showMovies, this::showHome);
+            stage.setScene(confirmation.createScene(booking));
         } catch (IllegalStateException e) {
             stage.setScene(new PlaceholderController(() -> showSeats(show))
                     .createScene(e.getMessage() + "\nPlease select different seats."));

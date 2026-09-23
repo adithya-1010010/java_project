@@ -9,7 +9,7 @@ Phase 05  Movie + theatre + show modules (browse)                         ← do
 Phase 06  Seat grid + availability                                         ← done
 Phase 07  Booking workflow + ticket calculation (transactional)            ← done
 Phase 08  Confirmation / ticket display
-Phase 08  Confirmation / ticket display
+Phase 08  Confirmation / ticket display                                        ← done
 Phase 09  End-to-end integration and validation
 Phase 10  Quality, polish, documentation, final acceptance
 ```

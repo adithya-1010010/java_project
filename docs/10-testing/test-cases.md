@@ -12,7 +12,7 @@ Requirement-to-test traceability is kept current here and in `docs/02-requiremen
 | REQ-09 | Missing/invalid customer details | ✅ Done (Phase 07) |
 | REQ-10 | Single + multiple ticket totals correct | ✅ Done (Phase 07) |
 | REQ-11 | Persisted; survives restart; no partial booking | ✅ Done (Phase 07) |
-| REQ-12 | Booking ID generated and returned | ✅ Done (Phase 07); display Phase 08 |
-| REQ-13 | Confirmation matches booking | Phase 08 |
+| REQ-12 | Booking ID generated and returned | ✅ Done (Phase 07); display ✅ Phase 08 |
+| REQ-13 | Confirmation matches booking | ✅ Done (Phase 08) |
 | REQ-14 | Domain/OOP behavior tests | ✅ Done (Phase 02) |
 | REQ-15 | Navigation from home | Phase 05/09 |
