@@ -125,6 +125,19 @@ Finalized in Phase 03 (schema resources in `src/main/resources/schema.sql` / `se
 - `DatabaseInitTest` adds a blocked-path failure test (`IllegalStateException`).
 - Full suite: 98 tests, 0 failures.
 
+## Final polish (Phase 10)
+
+- Removed dead code: unused `SeatController` seat-button map and unused column computation; imported `Movie` in `Main` instead of fully-qualified names.
+- Added empty-state handling to the seat grid (disabled Continue + message).
+- Finalized README, overview, OOP/database/testing docs, troubleshooting, future improvements.
+- **Decision:** membership/availability validation in `BookingService` uses seat **id**, not position-based `Seat.equals`, because `Seat.equals` is row+col aware (a foreign show's seat can otherwise map onto the same position). Recorded in troubleshooting.
+
+## Phase-10 verification
+
+- `mvn test`: BUILD SUCCESS, 98 tests, 0 failures.
+- `mvn javafx:run`: app opened (UI smoke).
+- All phases 01–10 committed and pushed; `git status` clean.
+
 ## Phase-09 verification
 
 - `mvn test`: BUILD SUCCESS, 98 tests, 0 failures.
@@ -151,8 +164,23 @@ Finalized in Phase 03 (schema resources in `src/main/resources/schema.sql` / `se
 - Completed: **Phase 07** (booking + ticket calc). Commit `phase-07: implement booking workflow and ticket calculation`.
 - Completed: **Phase 08** (confirmation + ticket display). Commit `phase-08: complete booking confirmation and ticket display`.
 - Completed: **Phase 09** (end-to-end integration + validation). Commit `phase-09: integrate and validate complete booking flow`.
-- Current: none in progress.
-- Next: **Phase 10** — Quality, polish, documentation, final acceptance (continuing automatically).
+- Completed: **Phase 10** (quality, polish, docs, final acceptance). Commit `phase-10: finalize quality documentation and project acceptance`.
+- **Project status:** complete — all ten phases committed and pushed.
+
+## Final acceptance checklist
+
+- [x] Application starts via `mvn javafx:run`.
+- [x] Login works; invalid credentials stay on login.
+- [x] Movies browsable with genres and prices.
+- [x] Shows selectable; seats in row/column grid.
+- [x] Unavailable seats blocked; duplicate bookings prevented (service + DB).
+- [x] Customer details validated; total calculated correctly.
+- [x] Booking persisted in SQLite; survives restart.
+- [x] Booking ID generated; confirmation shows complete ticket details.
+- [x] OOP concepts meaningfully demonstrated and documented.
+- [x] JUnit 5 suite passes (98 tests, 0 failures).
+- [x] Documentation complete and linked from README; `memory.md` current.
+- [x] Every phase committed and pushed to GitHub; phases done in order.
 
 ## Known limitations
 

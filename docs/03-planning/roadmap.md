@@ -11,7 +11,7 @@ Phase 07  Booking workflow + ticket calculation (transactional)            ← d
 Phase 08  Confirmation / ticket display
 Phase 08  Confirmation / ticket display                                        ← done
 Phase 09  End-to-end integration and validation                           ← done
-Phase 10  Quality, polish, documentation, final acceptance
+Phase 10  Quality, polish, documentation, final acceptance              ← done (project complete)
 ```
 
 No phase starts until the previous one is tested, documented, committed, and pushed.

@@ -12,6 +12,7 @@ import com.movieticketbooking.controller.SeatController;
 import com.movieticketbooking.controller.ShowController;
 import com.movieticketbooking.model.Booking;
 import com.movieticketbooking.model.Customer;
+import com.movieticketbooking.model.Movie;
 import com.movieticketbooking.model.Seat;
 import com.movieticketbooking.model.Show;
 import com.movieticketbooking.model.User;
@@ -78,7 +79,7 @@ public class Main extends Application {
         stage.setScene(movies.createScene());
     }
 
-    private void showShows(com.movieticketbooking.model.Movie movie) {
+    private void showShows(Movie movie) {
         ShowController shows = new ShowController(showService, this::showSeats, this::showMovies);
         stage.setScene(shows.createScene(movie.getId(), movie.getTitle()));
     }

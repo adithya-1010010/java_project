@@ -10,4 +10,10 @@ Explicitly out of scope today (confirmed):
 - Cancel / refund bookings.
 - Seat maps per theatre (beyond simple grid).
 
+Candidates noted during development (not scheduled):
+
+- Automated JavaFX UI tests (TestFX) for screen-level flows.
+- Booking history screen for the current user.
+- Password change / account management UI.
+
 Recorded decisions in `memory.md`; revisit only with a documented decision.

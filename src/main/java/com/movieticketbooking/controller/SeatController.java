@@ -14,9 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 
 public class SeatController {
@@ -38,7 +36,6 @@ public class SeatController {
 
     public Scene createScene(Show show) {
         List<Seat> seats = seatService.seatsForShow(show.getId());
-        Map<Seat, ToggleButton> buttons = new HashMap<>();
 
         Button continueButton = new Button("Continue");
         continueButton.setDisable(true);
@@ -47,7 +44,6 @@ public class SeatController {
         GridPane grid = new GridPane();
         grid.setHgap(6);
         grid.setVgap(6);
-        int maxColumn = seats.stream().mapToInt(Seat::getColumn).max().orElse(0);
         for (Seat seat : seats) {
             ToggleButton cell = new ToggleButton(seat.getLabel());
             cell.setPrefSize(44, 32);
@@ -63,7 +59,6 @@ public class SeatController {
                     continueButton.setDisable(selection.size() == 0);
                 });
             }
-            buttons.put(seat, cell);
             grid.add(cell, seat.getColumn() - 1, seat.getRow() - 'A');
         }
         grid.setAlignment(Pos.CENTER);
@@ -80,7 +75,11 @@ public class SeatController {
         Label title = new Label(show.getMovie().getTitle() + " — " + show.getTheatre().getName());
         title.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
 
-        VBox root = new VBox(15, title, grid, legend, continueButton, back);
+        Label empty = seats.isEmpty() ? new Label("No seats available for this show.") : new Label();
+        empty.setStyle("-fx-text-fill: #b00020;");
+        continueButton.setDisable(seats.isEmpty());
+
+        VBox root = new VBox(15, title, grid, empty, legend, continueButton, back);
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(20));
         return new Scene(root, 900, 640);

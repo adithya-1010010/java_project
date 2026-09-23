@@ -50,14 +50,14 @@ Home, Movie, Booking, Ticket, Confirmation — plus the OOP design module.
 | Phase | Focus | Status |
 |---|---|---|
 | 01 | Project foundation and documentation | ✅ Complete |
-| 02 | Domain model and OOP foundation | ⬜ Not started |
-| 03 | SQLite database and persistence | ⬜ Not started |
-| 04 | Authentication | ⬜ Not started |
-| 05 | Movie and show modules | ⬜ Not started |
-| 06 | Seat management | ⬜ Not started |
-| 07 | Booking and ticket calculation | ⬜ Not started |
-| 08 | Confirmation / ticket display | ⬜ Not started |
-| 09 | End-to-end integration | ⬜ Not started |
-| 10 | Quality, polish, final acceptance | ⬜ Not started |
+| 02 | Domain model and OOP foundation | ✅ Complete |
+| 03 | SQLite database and persistence | ✅ Complete |
+| 04 | Authentication | ✅ Complete |
+| 05 | Movie and show modules | ✅ Complete |
+| 06 | Seat management | ✅ Complete |
+| 07 | Booking and ticket calculation | ✅ Complete |
+| 08 | Confirmation / ticket display | ✅ Complete |
+| 09 | End-to-end integration | ✅ Complete |
+| 10 | Quality, polish, final acceptance | ✅ Complete |
 
 Current status and decisions: [memory.md](../13-reference/memory.md). Full blueprint: [implementation-plan.md](../03-planning/implementation-plan.md).
